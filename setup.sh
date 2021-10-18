@@ -1,22 +1,28 @@
 #!/bin/bash
 
+KEY=$1
+
 sudo apt update
 
 sudo apt upgrade
 
 sudo apt install nodejs
 
-sudo apt install npm 
+sudo apt install -y npm
 
 sudo apt install curl
 
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.36.0/install.sh | bash
+sudo apt install vim
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-nvm install 14.8.0
+if [ ! -d ~/.nvm ]; then
+  curl https://raw.githubusercontent.com/creationix/nvm/v0.11.1/install.sh | bash
+  source ~/.nvm/nvm.sh
+  source ~/.profile
+  source ~/.bashrc
+  nvm install 14.8.0
+  npm install
+  npm run front
+fi
 
 sudo apt-get install libnss3-dev
 
@@ -32,6 +38,10 @@ sudo apt-get install -y libgbm-dev
 
 sudo apt-get install -y libx11-xcb-dev
 
+git clone https://github.com/syphecoding/autobumper
+
+cd autobumper
+
 npm install
 
 npm install pm2 -g
@@ -40,8 +50,6 @@ npm install puppeteer
 
 sudo apt-get install chromium-browser
 
-sed -i 'config.key = "$1"' ./config.js
+sed -i.old "1s;^;var config = {}\n;config.key = 'var config = $1'\n;" ./config.js
 
 pm2 start npm -- start
-
-

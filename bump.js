@@ -1,9 +1,12 @@
 const puppeteer = require("puppeteer");
 const fs = require('fs');
 const filePath = './cookies.txt';
+const configPath = './cookies.txt';
+
 
 async function run(browser, threads) {
-	console.log(threads)
+	const msg = fs.readFileSync(configPath).userdata.msg;
+
 	let page = await browser.newPage();
 	await page.goto("https://sythe.org");
 
@@ -37,7 +40,7 @@ async function run(browser, threads) {
 
 			await new Promise((res) => setTimeout(res, 500));
 
-			await page.keyboard.type("Test.");
+			await page.keyboard.type(msg);
 
 			await page.click('#QuickReply > div.submitUnit > input.button.primary')
 
