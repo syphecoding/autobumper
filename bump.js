@@ -1,12 +1,12 @@
 const puppeteer = require("puppeteer");
 const fs = require('fs');
 const filePath = './cookies.txt';
-const configPath = './cookies.txt';
+const configPath = './file.json';
 
 
 async function run(browser, threads) {
 	const msg = await JSON.parse(fs.readFileSync(configPath)).userdata.message;
-	
+
 	let page = await browser.newPage();
 	await page.goto("https://sythe.org");
 

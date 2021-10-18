@@ -1,7 +1,7 @@
 
 const puppeteer = require("puppeteer")
 const bump =  require("./bump.js");
-const threadFile = __dirname + '/file.json';
+const threadFile = './file.json';
 const fs = require("fs");
 const LOOP = 50000;
 const DELAY = 240;

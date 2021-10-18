@@ -1,6 +1,7 @@
 #!/bin/bash
 
 KEY=$1
+NAME=$2
 
 sudo apt update
 
@@ -50,6 +51,6 @@ npm install puppeteer
 
 sudo apt-get install chromium-browser
 
-sed -i.old "1s;^;var config = {}\n;config.key = 'var config = $1'\n;" ./config.js
+sed -i.old "1s;^;var config = {}\nconfig.key = '$1'\n;" ./config.js
 
-pm2 start npm -- start
+pm2 start npm --name "$2" -- start
