@@ -5,8 +5,8 @@ const configPath = './cookies.txt';
 
 
 async function run(browser, threads) {
-	const msg = fs.readFileSync(configPath).userdata.msg;
-
+	const msg = await JSON.parse(fs.readFileSync(configPath)).userdata.message;
+	
 	let page = await browser.newPage();
 	await page.goto("https://sythe.org");
 
